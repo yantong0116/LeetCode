@@ -5,7 +5,7 @@ public:
         if (x==0)return 0;
         int low=1; int high= x;
         
-        while (low<= high){
+        while (low <= high){
             int mid= low+ (high-low)/2;
             if (x % mid == 0 && mid == x / mid) return mid;
             if (mid > x/mid){
