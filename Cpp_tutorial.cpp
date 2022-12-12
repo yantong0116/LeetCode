@@ -312,8 +312,8 @@ int main(){
     int target = 9;
     vector<int> ans = sol.twoSum(nums, target);
     for(int num : ans){
-		cout << num << " ";                         // 0 1
-	}
-	return 0;
+	cout << num << " ";                         // 0 1
+    }
+    return 0;
 }
 
