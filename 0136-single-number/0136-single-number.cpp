@@ -9,6 +9,6 @@ public:
             nums[i + 1] = nums[i] ^ nums[i + 1]; // (prev answer xor current index)
         }
         
-        return nums[n- 1]; // return left over element
+        return nums[n - 1]; // return left over element
     }
 };
