@@ -22,5 +22,16 @@ public:
             }
         }
         return true; 
+        
+//         map<char, char> dict1;
+//         map<char, char> dict2;
+//         for (int i = 0; i < s.size(); i++){
+//             if(dict1[s[i]] != dict2[t[i]]){ 
+//                 return false;
+//             }
+//             dict1[s[i]] = i + 1;
+//             dict2[t[i]] = i + 1;
+//         }
+//         return true; 
     }
 };
