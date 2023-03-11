@@ -11,25 +11,22 @@ class Solution(object):
         :type list2: Optional[ListNode]
         :rtype: Optional[ListNode]
         """
-        # Initialize pointers for both lists and the result list
-        i, j = list1, list2
-        result = ListNode()
-        curr = result
-        
-        # Traverse both lists, comparing values and merging nodes as necessary
-        while i and j:
-            if i.val < j.val:
-                curr.next = i
-                i = i.next
+        ans = ListNode()
+        temp = ans
+        while list1 and list2:
+            if list1.val < list2.val:
+                ans.next = list1
+                list1 = list1.next
             else:
-                curr.next = j
-                j = j.next
-            curr = curr.next
-        
-        # Add any remaining nodes from either list to the result
-        if i:
-            curr.next = i
-        elif j:
-            curr.next = j
-        
-        return result.next
+                ans.next = list2
+                list2 = list2.next
+            ans = ans.next
+        while list1:
+            ans.next = list1
+            ans = ans.next
+            list1 = list1.next
+        while list2:
+            ans.next = list2
+            ans = ans.next
+            list2 = list2.next
+        return  temp.next
