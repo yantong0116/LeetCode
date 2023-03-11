@@ -1,14 +1,26 @@
 class Solution {
 public:
     bool isIsomorphic(string s, string t) {
-        vector<int> d1(256);
-        vector<int> d2(256);
-        int n = s.size();
-        for (int i = 0; i < n; ++i) {
-            char a = s[i], b = t[i];
-            if (d1[a] != d2[b]) return false;
-            d1[a] = d2[b] = i + 1;
+        map<char, char> dict1;
+        map<char, char> dict2;
+        for (int i = 0; i < s.size(); i++){
+            if(dict1.find(s[i]) != dict1.end()){ 
+                if(dict1[s[i]] != t[i]){
+                    return false;
+                }
+            }
+            else {
+                dict1[s[i]] = t[i];
+            }
+            if(dict2.find(t[i]) != dict2.end()){ 
+                if(dict2[t[i]] != s[i]){
+                    return false;
+                }
+            }
+            else {
+                dict2[t[i]] = s[i];
+            }
         }
-        return true;
+        return true; 
     }
 };
