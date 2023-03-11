@@ -5,15 +5,16 @@ class Solution(object):
         :type t: str
         :rtype: bool
         """
-        s_dict = {}
-        t_dict = {}
-        
+        s2t = dict()
+        t2s = dict()
         for i in range(len(s)):
-            if s[i] in s_dict and s_dict[s[i]] != t_dict.get(t[i]):
+            if s[i] not in s2t:
+                if t[i] not in t2s:
+                    s2t[s[i]] = t[i]
+                    t2s[t[i]] = s[i]
+                else:
+                    return False
+            elif s2t[s[i]] != t[i]:
                 return False
-            if t[i] in t_dict and t_dict[t[i]] != s_dict.get(s[i]):
-                return False
-            s_dict[s[i]] = i
-            t_dict[t[i]] = i
-            
+        
         return True
