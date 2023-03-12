@@ -18,24 +18,6 @@ public:
 };
 */
 
-// class Solution {
-// public:
-//     vector<int> preorder(Node* root) {
-//         vector<int> result;
-        
-//         vector<int> recur(Node* curr){
-//             if(curr){
-//                 result.push_back(curr->val);
-//                 for(Node* child: curr->children){
-//                     recur(child);
-//                 }
-//             }
-//         }
-//         recur(root);
-//         return result;
-//     }
-// };
-
 class Solution {
 public:
     vector<int> preorder(Node* root) {
