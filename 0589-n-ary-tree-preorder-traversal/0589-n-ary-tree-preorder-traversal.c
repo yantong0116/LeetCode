@@ -11,30 +11,18 @@
  * Note: The returned array must be malloced, assume caller calls free().
  */
 
-int countNodes(struct Node * root) {
-    int c = 0;
-    if (root == NULL)
-        return 0;
-    for (int i = 0; i < root->numChildren; i++)
-        c = c + countNodes(root->children[i]);
-    return (c + 1);
-}
-
-void recur(struct Node * root, int *v, int *pos) {
-    int i;
-    if (root == NULL)
-        return;
-    v[*pos] = root->val;
-    *pos = *pos + 1;
-    for (i = 0; i < root->numChildren; i++)
-        recur(root->children[i], v, pos);
-    return;
+void search(struct Node* root, int* arr, int* count) {
+    if (!root) return;
+    arr[(*count)++] = root->val;
+    for (int i = 0; i < root->numChildren; i++) {
+        search(root->children[i], arr, count);
+    }
 }
 
 int* preorder(struct Node* root, int* returnSize) {
-    *returnSize = countNodes(root);
-    int* result = (int*)malloc(*returnSize * sizeof(int));
-    int pos = 0;
-    recur(root, result, &pos);
-    return result;
+    int* arr = (int*) malloc(10000 * sizeof(int));
+    int count = 0;
+    search(root, arr, &count);
+    *returnSize = count;
+    return arr;
 }
