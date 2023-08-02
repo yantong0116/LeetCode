@@ -3,8 +3,7 @@ public:
     double findMaxAverage(vector<int>& nums, int k) {
         double temp = 0;
         
-        for(int i = 0; i < k; i++) 
-            temp += nums[i];
+        for(int i = 0; i < k; i++) temp += nums[i];
         
         double result = temp / k;
         
