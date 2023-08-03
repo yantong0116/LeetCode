@@ -10,26 +10,49 @@
  * };
  */
 
+// class Solution {
+// public:
+//     int count = 0;
+    
+//     void solve(TreeNode* root, long int targetSum){
+//         if(root == NULL) return;
+        
+//         if(root->val == targetSum){
+//             count++;
+//         }
+        
+//         solve(root->left, targetSum - root->val);
+//         solve(root->right, targetSum - root->val);
+//     }
+    
+//     int pathSum(TreeNode* root, int targetSum) {
+//         if(root == NULL) return 0;
+//         solve(root, targetSum);
+//         pathSum(root->left, targetSum);
+//         pathSum(root->right, targetSum);
+//         return count;
+//     }
+// };
+
+
 class Solution {
 public:
-    int count = 0;
-    
-    void solve(TreeNode* root,long int targetSum){
-        if(root==NULL) return;
-        
-        if(targetSum==root->val){
+    int pathSum(TreeNode* root, int targetSum) {
+        if (root == nullptr) return 0;
+        return countPathsWithSum(root, targetSum) + pathSum(root->left, targetSum) + pathSum(root->right, targetSum);
+    }
+
+private:
+    int countPathsWithSum(TreeNode* node, long int targetSum) {
+        if (node == nullptr) return 0;
+
+        int count = 0;
+        if (node->val == targetSum) {
             count++;
         }
-        
-        solve(root->left, targetSum - root->val);
-        solve(root->right, targetSum - root->val);
-    }
-    
-    int pathSum(TreeNode* root, int targetSum) {
-        if(root == NULL) return 0;
-        solve(root, targetSum);
-        pathSum(root->left, targetSum);
-        pathSum(root->right, targetSum);
+
+        count += countPathsWithSum(node->left, targetSum - node->val);
+        count += countPathsWithSum(node->right, targetSum - node->val);
         return count;
     }
 };
