@@ -1,33 +1,32 @@
-class Solution {
-public:
-    string decodeString(string s) {
-        stack<int> numStack;
-        stack<string> strStack;
-        string currentStr;
-        int num = 0;
-        
-        for (char c : s) {
-            if (isdigit(c)) {
-                num = num * 10 + c - '0';
-            } else if (isalpha(c)) {
-                currentStr += c;
-            } else if (c == '[') {
-                numStack.push(num);
-                strStack.push(currentStr);
-                num = 0;
-                currentStr = "";
-            } else if (c == ']') {
-                int repeatTimes = numStack.top();
-                numStack.pop();
-                string lastStr = strStack.top();
-                strStack.pop();
-                string repeatedStr;
-                for (int i = 0; i < repeatTimes; i++) {
-                    repeatedStr += currentStr;
-                }
-                currentStr = lastStr + repeatedStr;
+char * decodeString(char * s){
+    int len = strlen(s), ansIdx = 0, sIdx = -1, idx = 0;
+    char* stack = (char*)calloc(10000, sizeof(char));
+    while(idx < len){
+        if(s[idx]!=']')
+            stack[++sIdx] = s[idx];
+        else{
+            /* find the beginning of current string [....] 
+             * copy the string into tmp 
+             * find the repeat cnt than put it back to stack */
+            int strEnd = sIdx;
+            while(stack[sIdx]!='['){ sIdx--; }
+            int strStart = sIdx + 1;
+            sIdx--;
+            int len = strEnd - strStart + 1;
+            char* tmp = (char*)calloc(len, sizeof(char));
+            memcpy(tmp, &stack[strStart], sizeof(char)*len);
+            int repeatCnt = 0, multi = 1; 
+            while(sIdx >= 0 && stack[sIdx]>='0' && stack[sIdx]<='9'){
+                repeatCnt += ((stack[sIdx--]-'0') * multi);
+                multi *= 10;
             }
+            for(int i = 0; i < repeatCnt; i++)
+                for(int j = 0; j < len; j++)
+                    stack[++sIdx] = tmp[j];
+            free(tmp);
         }
-        return currentStr;
+        idx++;
     }
-};
+    stack[++sIdx] = '\0';
+    return stack;
+}
