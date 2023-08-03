@@ -14,7 +14,7 @@ class Solution {
 public:
     int count = 0;
     
-    void solve(TreeNode* root,long long int targetSum){
+    void solve(TreeNode* root,long int targetSum){
         if(root==NULL) return;
         
         if(targetSum==root->val){
