@@ -15,9 +15,8 @@ class Solution {
 public:
     int pathLength = 0;
     void dfs(TreeNode* node, bool goLeft, int steps) {
-        if (node == nullptr) {
-            return;
-        }
+        if (node == nullptr) return;
+
         pathLength = max(pathLength, steps);
         if (goLeft) {
             dfs(node->left, false, steps + 1);
