@@ -21,11 +21,11 @@ public:
             count++;
         }
         
-        solve(root->left, targetSum - root->val);
-        solve(root->right, targetSum - root->val);
+        solve(root->left, targetSum-root->val);
+        solve(root->right, targetSum-root->val);
     }
     
-    int pathSum(TreeNode* &root, int targetSum) {
+    int pathSum(TreeNode* &root, int &targetSum) {
         if(root == NULL) return 0;
         solve(root, targetSum);
         pathSum(root->left, targetSum);
