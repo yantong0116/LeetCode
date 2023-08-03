@@ -8,12 +8,10 @@
  */
 
 int solve(struct TreeNode* root, long int targetSum){
-    if (root == NULL) return 0;
-
     int count = 0;
-    if (root->val == targetSum) {
-        count++;
-    }
+    
+    if (root == NULL) return 0;
+    if (root->val == targetSum) count++;
 
     count += solve(root->left, targetSum - root->val);
     count += solve(root->right, targetSum - root->val);
