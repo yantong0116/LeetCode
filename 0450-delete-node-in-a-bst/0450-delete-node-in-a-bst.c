@@ -6,21 +6,38 @@
  *     struct TreeNode *right;
  * };
  */
-struct TreeNode* deleteNode(struct TreeNode* root, int key){
-    if(root){
-        //We frecursively call the function until we find the target node
-        if(key < root->val) root->left = deleteNode(root->left, key);     
-        else if(key > root->val) root->right = deleteNode(root->right, key);       
-        else{
-            if(!root->left && !root->right) return NULL;  
-            if (!root->left || !root->right)
-                return root->left ? root->left : root->right;    //One child contion -> replace the node with it's child
-                                                                //Two child condition   
-            struct TreeNode* temp = root->left;                        //(or) TreeNode *temp = root->right;
-            while(temp->right != NULL) temp = temp->right;     //      while(temp->left != NULL) temp = temp->left;
-            root->val = temp->val;                            //       root->val = temp->val;
-            root->left = deleteNode(root->left, temp->val);  //        root->right = deleteNode(root->right, temp);		
+
+struct TreeNode* findMin(struct TreeNode* node) {
+    while (node->left) {
+        node = node->left;
+    }
+    return node;
+}
+
+struct TreeNode* deleteNode(struct TreeNode* root, int key) {
+    if (!root) {
+        return NULL;
+    }
+
+    if (key < root->val) {
+        root->left = deleteNode(root->left, key);
+    } else if (key > root->val) {
+        root->right = deleteNode(root->right, key);
+    } else {
+        if (!root->left) {
+            struct TreeNode* temp = root->right;
+            free(root);
+            return temp;
+        } else if (!root->right) {
+            struct TreeNode* temp = root->left;
+            free(root);
+            return temp;
         }
+
+        // Node with two children: Get the inorder successor (min value in the right subtree)
+        struct TreeNode* temp = findMin(root->right);
+        root->val = temp->val;
+        root->right = deleteNode(root->right, temp->val);
     }
     return root;
 }
