@@ -9,7 +9,9 @@ int romanToInt(char* s) {
     romanValues['M' - 'A'] = 1000;
 
     int len = strlen(s);
-    int result = romanValues[s[len - 1] - 'A']; // Initialize result with the value of the last symbol
+    
+    // Initialize result with the value of the last symbol
+    int result = romanValues[s[len - 1] - 'A']; 
 
     for (int i = len - 2; i >= 0; i--) {
         // If the value of the current symbol is less than the value of the next symbol,
@@ -20,6 +22,5 @@ int romanToInt(char* s) {
             result += romanValues[s[i] - 'A'];
         }
     }
-
     return result;
 }
